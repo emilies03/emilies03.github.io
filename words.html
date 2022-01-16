@@ -1,0 +1,68 @@
+<html>
+  <head>
+      <title>Wordle Practice</title>
+      <link rel="stylesheet" href="common.css" />
+    </head>
+  <body>
+     <h1>Wordle Practice</h1>
+     <div class="slideContainer">
+        <h3>Word length</h3>
+        <div class="sliderRow">
+            <input type="range" min="3" max="7" value="4" oninput="sliderChange(this.value)" id="slider">
+            <p class="sliderValue" id=”rangeValue”>4</p>
+        </div> 
+      </div>
+      <div class="wordGrid" id="wordGrid">
+        <div class="wordRow">
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+        </div>
+        <div class="wordRow">
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+        </div>
+        <div class="wordRow">
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+        </div>
+        <div class="wordRow">
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+            <div class="wordBox"></div>
+        </div>
+      </div>
+     
+      <script>
+        function sliderChange(value) {
+            var letterCount = document.getElementById("slider").value;
+            document.getElementById("”rangeValue”").innerHTML = letterCount;
+        
+            var rowGrids = document.getElementById("wordGrid");
+            rowGrids.innerHTML = "";
+
+            var row = document.createElement('div');
+            row.setAttribute("class", "wordRow");    
+            row.setAttribute("id", "wordRow");
+            for (var j = 0; j<letterCount; j++){
+                var newBox = document.createElement('div');
+                newBox.setAttribute("class", "wordBox");    
+                newBox.setAttribute("id", "wordBox-" + j);
+                row.appendChild(newBox);
+            }
+            for (var i = 0; i<letterCount-1; i++){
+                rowGrids.appendChild(row);
+                var newRow = row.cloneNode(true);
+                newRow.setAttribute("id", "wordRow-" + i);
+                rowGrids.appendChild(newRow);
+            }
+        }
+        </script>  
+  </body>
+</html>
